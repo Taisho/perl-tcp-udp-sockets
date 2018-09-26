@@ -2,6 +2,7 @@
 #tcpserver.pl
 
 use IO::Socket::INET;
+use Cwd;
 
 # flush after every write
 $| = 1;
@@ -10,8 +11,9 @@ my ($socket,$client_socket);
 my ($peeraddress,$peerport);
 
 
-my $dirname = glob(".");
-if(!ref($ARGV[0])) { # if its not a reference, then it is a string :)
+my $dirname = cwd();
+if(@ARGV == 1) { # if its not a reference, then it is a string :)
+    print "param: ".$ARGV[0];
     $dirname = $ARGV[0];
 } else {
     print "No target directory specified. Will serve current directory, which is ".$dirname."\n";
