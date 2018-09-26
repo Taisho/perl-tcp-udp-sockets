@@ -8,7 +8,14 @@ $| = 1;
 
 my ($socket,$client_socket);
 my ($peeraddress,$peerport);
-$dirname = glob("~/Deutsch/");
+
+
+my $dirname = glob(".");
+if(!ref($ARGV[0])) { # if its not a reference, then it is a string :)
+    $dirname = $ARGV[0];
+} else {
+    print "No target directory specified. Will serve current directory, which is ".$dirname."\n";
+}
 
 # creating object interface of IO::Socket::INET modules which internally does 
 # socket creation, binding and listening at the specified port address.
